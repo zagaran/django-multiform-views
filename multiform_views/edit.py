@@ -94,7 +94,7 @@ class FormsMixin(ContextMixin):
         If the form for a particular form key is invalid, render the invalid form.
             Implement <form_key>_invalid(self, form) to specify behavior for a single form
         """
-        form_invalid_method = f"{form_key}_valid"
+        form_invalid_method = f"{form_key}_invalid"
         if hasattr(self, form_invalid_method):
             return getattr(self, form_invalid_method)(form)
         else:
