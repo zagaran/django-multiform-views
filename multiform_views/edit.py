@@ -36,7 +36,14 @@ class FormsMixin(ContextMixin):
         return self.get_form_classes()[form_key]
 
     def get_form(self, form_key):
-        """Return an instance of the form to be used in this view for a particular form key."""
+        """
+        Return an instance of the form to be used in this view for a particular form key.
+            Implement get_<form_key> to override the default form instantiation.
+        """
+        form_method = f"get_{form_key}"
+        if hasattr(self, form_method):
+            return getattr(self, form_method)()
+
         form_class = self.get_form_class(form_key)
         kwargs = self.get_form_kwargs(form_key)
         kwargs_method = f"get_{form_key}_kwargs"
