@@ -3,6 +3,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import
 
 
 class FormsMixin(ContextMixin):
@@ -145,12 +146,12 @@ class ProcessFormsView(View):
         try:
             form_key = request.POST["_key"]
             form = self.get_form(form_key)
-            if form.is_valid():
-                return self.form_valid(form, form_key)
-            else:
-                return self.form_invalid(form, form_key)
         except KeyError:
             return HttpResponseForbidden()
+        if form.is_valid():
+            return self.form_valid(form, form_key)
+        else:
+            return self.form_invalid(form, form_key)
 
 
 class BaseFormsView(FormsMixin, ProcessFormsView):
