@@ -3,7 +3,6 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import
 
 
 class FormsMixin(ContextMixin):
