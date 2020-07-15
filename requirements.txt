@@ -6,9 +6,9 @@
 #
 appdirs==1.4.3            # via black
 attrs==19.3.0             # via black
-black==19.10b0
+black==19.10b0            # via -r requirements.in
 click==7.0                # via black
-django==2.2.7
+django==2.2.13            # via -r requirements.in
 pathspec==0.6.0           # via black
 pytz==2019.3              # via django
 regex==2019.11.1          # via black
