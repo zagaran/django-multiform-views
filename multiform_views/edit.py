@@ -57,11 +57,11 @@ class FormsMixin(ContextMixin):
             Implement get_<form_key>_kwargs to add additional keyword arguments like instance or prefix.
         """
         kwargs = {
-            "initial": {"_key": form_key, **self.get_initial(form_key)},
+            "initial": {"multiform_key": form_key, **self.get_initial(form_key)},
         }
         if (
             self.request.method in ["POST", "PUT"]
-            and self.request.POST["_key"] == form_key
+            and self.request.POST["multiform_key"] == form_key
         ):
             kwargs.update(
                 {"data": self.request.POST, "files": self.request.FILES,}
@@ -118,10 +118,10 @@ class FormsMixin(ContextMixin):
         for form_key, form_class in self.get_form_classes().items():
             if form_key not in kwargs:
                 form = self.get_form(form_key)
-                form.fields["_key"] = forms.CharField(widget=forms.HiddenInput())
+                form.fields["multiform_key"] = forms.CharField(widget=forms.HiddenInput())
                 form_context[form_key] = form
             else:
-                kwargs[form_key].fields["_key"] = forms.CharField(
+                kwargs[form_key].fields["multiform_key"] = forms.CharField(
                     widget=forms.HiddenInput()
                 )
         return super().get_context_data(**kwargs, **form_context)
@@ -143,7 +143,7 @@ class ProcessFormsView(View):
         attached with the context
         """
         try:
-            form_key = request.POST["_key"]
+            form_key = request.POST["multiform_key"]
             form = self.get_form(form_key)
         except KeyError:
             return HttpResponseForbidden()
