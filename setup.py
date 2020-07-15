@@ -34,5 +34,5 @@ setup(
     name="django-multiform-views",
     packages=find_packages(),
     url="https://github.com/zagaran/django-multiform-views",
-    version="0.1.0a5",
+    version="0.1.0a6",
 )
