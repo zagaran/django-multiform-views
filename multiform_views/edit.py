@@ -29,7 +29,9 @@ class FormsMixin(ContextMixin):
 
     def get_form_classes(self):
         """Return the form classes to use."""
-        return self.form_classes
+        return {
+            **self.form_classes
+        }
 
     def get_form_class(self, form_key):
         """Return the form class to use for a particular form key."""
