@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.views.generic import FormView
 from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 from django.views.generic.detail import SingleObjectMixin
 
@@ -151,7 +152,6 @@ class ProcessFormsView(View):
             return self.form_valid(form, form_key)
         else:
             return self.form_invalid(form, form_key)
-
 
 class BaseFormsView(FormsMixin, ProcessFormsView):
     """A base view for displaying forms."""
